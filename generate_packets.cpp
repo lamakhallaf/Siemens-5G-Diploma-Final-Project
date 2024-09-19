@@ -52,7 +52,7 @@ string removeComments (string line) {
     return line; 
 }
 
-int packets(EthernetConfigs packet){
+int packets(EthernetConfigs packet, string fileName){
 
     packet.data.push_back("FB555555"); //Preamble and SFD
     int length = getLength(packet.data);
@@ -77,12 +77,12 @@ int packets(EthernetConfigs packet){
     }
     
     fileOut( packet.data,  "Packets.txt"); //name will be a user input
-    burst(packet, length);
+    burst(packet, length, fileName);
 
     return getLength(packet.data);
 }
 
-void burst(EthernetConfigs packet, int packetLength){
+void burst(EthernetConfigs packet, int packetLength, string fileName){
     float lineRateBpms = float(stoi(packet.map["Eth.LineRate"])*(pow(10, 9))/8); // Bytes per second
     int bytesToSend = stoi(packet.map["Eth.BurstSize"]) * packetLength; //packet length including ifgs
     float burstPeriod = float(stoi(packet.map["Eth.BurstPeriodicity_us"])*pow(10, -6)); // in seconds
@@ -110,7 +110,7 @@ void burst(EthernetConfigs packet, int packetLength){
 
     int totalBytes = bytesPerBurst * numBursts;
     int k = 0;
-    writePacketsToFile(packet,  ifgBytes,  numBursts,  "Output.txt");
+    writePacketsToFile(packet,  ifgBytes,  numBursts,  fileName);
 
 }
 void writePacketsToFile(EthernetConfigs packet, int ifgBytes, int numBursts, string fileName) {

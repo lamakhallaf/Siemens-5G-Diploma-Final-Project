@@ -31,8 +31,8 @@ class EthernetConfigs {
 };
 
 unordered_map<string, string> readFile(string filePath);
-int packets(EthernetConfigs packet);
-void burst(EthernetConfigs packet, int length);
+int packets(EthernetConfigs packet, string fileName);
+void burst(EthernetConfigs packet, int length, string fileName);
 void writePacketsToFile(EthernetConfigs packet, int ifgBytes, int numBursts,  string fileName);
 string hexa(string input);
 int checkPadding(int packetSize, string ifg);
