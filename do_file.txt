@@ -1,0 +1,9 @@
+# Compile source files
+g++ -std=c++17 -c main.cpp
+g++ -std=c++17 -c generate_packets.cpp
+
+# Link object files to create the executable
+g++ -std=c++17 -o PacketGenerator main.o generate_packets.o
+
+# Run the executable
+./PacketGenerator
