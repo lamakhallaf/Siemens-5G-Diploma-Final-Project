@@ -137,6 +137,7 @@ void fragmentationCheck(EthernetConfigs packet, int payloadSize){
     //Comparing with Ethernet Payload
     if (payloadSize < oranSize) {
         cout << "Fragmentation error! Please reduce your PRB per packet or increase your maximum packet size!" << endl;
+        return;
     }
 }
 
