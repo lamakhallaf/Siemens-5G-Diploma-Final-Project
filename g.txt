@@ -9,5 +9,5 @@ Eth.BurstPeriodicity_us =100// The periodicity of the burst in microseconds
 
 100,000,000 bits in 10 ms capture size 
 12,500,000 bytes  
-100 bursts 
-100*3 = 300 packets 
+1000 bursts 
+1000*3 = 3000 packets 
