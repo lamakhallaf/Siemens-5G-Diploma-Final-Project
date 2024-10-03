@@ -53,7 +53,6 @@ void fullPayload(EthernetConfigs &packet, int m, string outFile){
 
     vector<string> IQ;
     IQ = readIQSamples("iq.txt");
-    
     //ECPRI Payload (ORAN)
     for (int i = 0; i < totalPackets; i++){ 
         //Step 1: Ethernet Header
@@ -95,7 +94,6 @@ void fullPayload(EthernetConfigs &packet, int m, string outFile){
     
     string FCS = fcs (packet);
     packet.data.push_back(FCS); // 
-
     int seqId = i%256; //reaches 255, then goes back to zero
     packet.data.push_back(iToHex(seqId, 4)); //ECPRI SeqId
     int padding = checkPadding(getLength(packet.data), packet.map["Eth.MinNumOfIFGsPerPacket"]);
@@ -137,7 +135,7 @@ void fragmentationCheck(EthernetConfigs packet, int payloadSize){
     //Comparing with Ethernet Payload
     if (payloadSize < oranSize) {
         cout << "Fragmentation error! Please reduce your PRB per packet or increase your maximum packet size!" << endl;
-        return;
     }
+    
 }
 

@@ -63,7 +63,6 @@ void packets(EthernetConfigs &packet, string fileName, int m){
     int oranPayload = payloadSize - 14; // 6 bytes for ECPRI Header, 8 bytes for ORAN header + section header
     fragmentationCheck(packet, oranPayload);
     packet.data.push_back(iToHex(payloadSize, 4));
-
     if (m==1){
         for (int i = 0; i< payloadSize ; i++){
             packet.data.push_back("00");
@@ -77,7 +76,7 @@ void packets(EthernetConfigs &packet, string fileName, int m){
             packet.data.push_back("07");
         }
     
-    burst(packet, length, "Bursts.txt");
+    burst(packet, length, fileName);
     }
 }
 
@@ -91,7 +90,6 @@ void burst(EthernetConfigs packet, int packetLength, string fileName){
 
     int bytes = stoi(packet.map["Eth.LineRate"])*(pow(10, 9))/8 * stoi(packet.map["Eth.CaptureSizeMs"]);
     int numBursts = float(stoi(packet.map["Eth.CaptureSizeMs"])*pow(10, -3)/burstPeriod);
-    cout << "Num bursts = " << numBursts << endl;
 
     vector<string> stream; 
     float transmissionTime = (bytesToSend) / (lineRateBpms); // time in microseconds
@@ -126,8 +124,6 @@ void writePacketsToFile(EthernetConfigs packet, int ifgBytes, int numBursts, str
         return;
     }
 
-    cout << "Writing data to " << fileName << "..." << endl;
-
     // Combine all packet data into a single string
     string combinedData;
     for (const auto& hexStr : packet.data) {
@@ -151,7 +147,6 @@ void writePacketsToFile(EthernetConfigs packet, int ifgBytes, int numBursts, str
     }
 
     outputFile.close();
-    cout << "Data written to " << fileName << " successfully." << endl;
 }
 
 

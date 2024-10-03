@@ -34,10 +34,23 @@ class EthernetConfigs {
     
     //ideally i should take the txt file and add keys accordingly
     unordered_set<int> scs = {15, 30, 60 };
-    
-    EthernetConfigs(){
-        packet_time = 0;
-    }
+        EthernetConfigs() {
+        map = {
+            {"Eth.LineRate", "0"},
+            {"Eth.CaptureSizeMs", "0"},
+            {"Eth.MinNumOfIFGsPerPacket", "0"},
+            {"Eth.DestAddress", "0"},
+            {"Eth.SourceAddress", "0"},
+            {"Eth.MaxPacketSize", "0"},
+            {"Eth.BurstSize", "0"},
+            {"Eth.BurstPeriodicity_us", "0"},
+            {"Oran.SCS", "0"},
+            {"Oran.MaxNrb", "0"},
+            {"Oran.NrbPerPacket", "0"},
+            {"Oran.PayloadType", "0"},
+            {"Oran.Payload", "0"}
+        };
+        }
 };
 
 unordered_map<string, string> readFile(string filePath);
